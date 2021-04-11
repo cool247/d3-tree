@@ -11,7 +11,7 @@ const App = ()=> {
 
  const chartShownToggler=(e)=>{
     e.preventDefault()
-    setchartShown({chartShown:!chartShown})
+    setchartShown(!chartShown)
   }
 
 
