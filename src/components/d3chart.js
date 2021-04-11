@@ -1,37 +1,37 @@
-import React from 'react';
-import Tree from 'react-d3-tree';
+import React, { useState, useEffect } from "react";
+import CentredTree from "react-d3-tree";
+import axios from "axios";
+import "./app.css";
 
-// This is a simplified example of an org chart with a depth of 2.
-// Note how deeper levels are defined recursively via the `children` property.
 const orgChart = {
-  name: 'CEO',
+  name: "CEO",
   children: [
     {
-      name: 'Manager',
+      name: "Manager",
       attributes: {
-        department: 'Production',
-        role:"admin"
+        department: "Production",
+        role: "admin",
       },
       children: [
         {
-          name: 'Foreman',
+          name: "Foreman",
           attributes: {
-            department: 'Fabrication',
+            department: "Fabrication",
           },
           children: [
             {
-              name: 'Worker',
+              name: "Worker",
             },
           ],
         },
         {
-          name: 'Foreman',
+          name: "Foreman",
           attributes: {
-            department: 'Assembly',
+            department: "Assembly",
           },
           children: [
             {
-              name: 'Worker',
+              name: "Worker",
             },
           ],
         },
@@ -41,10 +41,25 @@ const orgChart = {
 };
 
 export default function OrgChartTree() {
+  const [hierarchyData, setHierarchyData] = useState({});
+
+  useEffect(() => {
+    getHierarchyData();
+  });
+
+  async function getHierarchyData() {
+    try {
+      const response = await axios.get("API");
+      setHierarchyData(response);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
-    // `<Tree />` will fill width/height of its container; in this case `#treeWrapper`.
-    <div id="treeWrapper" style={{ width: '50em', height: '20em' }}>
-      <Tree data={orgChart} />
+    <div id="treeWrapper" style={{ width: "50em", height: "40em" }}>
+      <CentredTree data={orgChart} />
     </div>
   );
 }

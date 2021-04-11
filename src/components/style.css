@@ -1,0 +1,27 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-container {
+  position: absolute;
+  width: 100%;
+  background: #c03e3ea1;
+  width: 60%;
+  left: 20%;
+  top: 15%;
+}
+.d-block {
+  display: block;
+}
+.d-none {
+  display: none;
+}
+.modal-close {
+  cursor: pointer;
+}
+.model-open {
+  cursor: pointer;
+}

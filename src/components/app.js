@@ -1,31 +1,39 @@
-import React, { useState } from 'react'
-import ChartTree from './d3chart'
+import React, { useState } from "react";
+import ChartTree from "./d3chart";
+import Modal from "./modal";
+import "./style.css";
 
+const App = () => {
+  const [chartShown, setChartShown] = useState(false);
+  const [modal, setModal] = useState(false);
 
-const App = ()=> {
-  const [chartShown, setchartShown] = useState(false);
+  const modalOpen = () => {
+    setModal(true);
+    setChartShown(!chartShown);
+  };
 
-  // state = {
-  //   chartShown:false
-  // }
+  const modalClose = () => {
+    setModal(false);
+    setChartShown(!chartShown);
+  };
 
- const chartShownToggler=(e)=>{
-    e.preventDefault()
-    setchartShown(!chartShown)
-  }
-
-
-  const renderChart=()=>{
+  const renderChart = () => {
     if (chartShown) {
-      return(<ChartTree/>)
+      return <ChartTree />;
     }
-    return null
-  }
-    return <div>
-        <h1>Hello</h1>
-        {renderChart()}
-        <button type="button" onClick={chartShownToggler}>D3 View</button> 
+    return null;
+  };
+  return (
+    <div>
+      <div className="App">
+        <p className="model-open" onClick={(e) => modalOpen(e)}>
+          Open Modal
+        </p>
+        <Modal show={modal} handleClose={(e) => modalClose(e)}>
+          {renderChart()}
+        </Modal>
       </div>
-      
-    }
-export default App
+    </div>
+  );
+};
+export default App;
