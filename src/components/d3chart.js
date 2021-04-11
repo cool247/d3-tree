@@ -10,6 +10,7 @@ const orgChart = {
       name: 'Manager',
       attributes: {
         department: 'Production',
+        role:"admin"
       },
       children: [
         {

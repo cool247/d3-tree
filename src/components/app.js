@@ -1,29 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ChartTree from './d3chart'
 
-class App extends React.Component {
-  state = {
-    chartShown:false
-  }
 
-  chartShownToggler=(e)=>{
+const App = ()=> {
+  const [chartShown, setchartShown] = useState(false);
+
+  // state = {
+  //   chartShown:false
+  // }
+
+ const chartShownToggler=(e)=>{
     e.preventDefault()
-    this.setState({chartShown:!this.state.chartShown})
+    setchartShown({chartShown:!chartShown})
   }
 
 
-  renderChart(){
-    if (this.state.chartShown) {
+  const renderChart=()=>{
+    if (chartShown) {
       return(<ChartTree/>)
     }
     return null
   }
-    render() {
-      return <div>
+    return <div>
         <h1>Hello</h1>
-        {this.renderChart()}
-        <button type="button" onClick={this.chartShownToggler}>D3 View</button> 
+        {renderChart()}
+        <button type="button" onClick={chartShownToggler}>D3 View</button> 
       </div>
       
-    }}
+    }
 export default App
