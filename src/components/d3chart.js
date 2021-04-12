@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
-import CentredTree from "react-d3-tree";
-import axios from "axios";
-import "./app.css";
+import React from "react";
+import Tree from "react-d3-tree";
 
-const orgChart = {
+//import { useCenteredTree } from "./helper";
+
+const containerStyles = {
+  width: "100vw",
+  height: "100vh",
+};
+const orgChartJson = {
   name: "CEO",
+  id: "123",
   children: [
     {
       name: "Manager",
@@ -40,26 +45,45 @@ const orgChart = {
   ],
 };
 
-export default function OrgChartTree() {
-  const [hierarchyData, setHierarchyData] = useState({});
+// Here we're using `renderCustomNodeElement` render a component that uses
+// both SVG and HTML tags side-by-side.
+// This is made possible by `foreignObject`, which wraps the HTML tags to
+// allow for them to be injected into the SVG namespace.
+const renderForeignObjectNode = ({
+  nodeDatum,
+  toggleNode,
+  foreignObjectProps,
+}) => (
+  <g>
+    <circle r={15}></circle>
+    {/* `foreignObject` requires width & height to be explicitly set. */}
+    <foreignObject {...foreignObjectProps}>
+      <div style={{ border: "1px solid black", backgroundColor: "#dedede" }}>
+        <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
+        {nodeDatum.children && (
+          <button style={{ width: "100%" }} onClick={toggleNode}>
+            {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}
+          </button>
+        )}
+      </div>
+    </foreignObject>
+  </g>
+);
 
-  useEffect(() => {
-    getHierarchyData();
-  });
-
-  async function getHierarchyData() {
-    try {
-      const response = await axios.get("API");
-      setHierarchyData(response);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+export default function Chart() {
+  //const [translate, containerRef] = useCenteredTree();
+  const nodeSize = { x: 200, y: 200 };
+  const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: 20 };
   return (
-    <div id="treeWrapper" style={{ width: "50em", height: "40em" }}>
-      <CentredTree data={orgChart} />
+    <div style={containerStyles}>
+      <Tree
+        data={orgChartJson}
+        translate={{ x: 100, y: 250 }}
+        nodeSize={nodeSize}
+        renderCustomNodeElement={(rd3tProps) =>
+          renderForeignObjectNode({ ...rd3tProps, foreignObjectProps })
+        }
+      />
     </div>
   );
 }
