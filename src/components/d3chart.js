@@ -45,10 +45,6 @@ const orgChartJson = {
   ],
 };
 
-// Here we're using `renderCustomNodeElement` render a component that uses
-// both SVG and HTML tags side-by-side.
-// This is made possible by `foreignObject`, which wraps the HTML tags to
-// allow for them to be injected into the SVG namespace.
 const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
@@ -59,7 +55,9 @@ const renderForeignObjectNode = ({
     {/* `foreignObject` requires width & height to be explicitly set. */}
     <foreignObject {...foreignObjectProps}>
       <div style={{ border: "1px solid black", backgroundColor: "#dedede" }}>
-        <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
+        <h3 style={{ textAlign: "center", fontSize: "12px" }}>
+          {nodeDatum.name}
+        </h3>
         {nodeDatum.children && (
           <button style={{ width: "100%" }} onClick={toggleNode}>
             {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}
@@ -72,8 +70,8 @@ const renderForeignObjectNode = ({
 
 export default function Chart() {
   //const [translate, containerRef] = useCenteredTree();
-  const nodeSize = { x: 200, y: 200 };
-  const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: 20 };
+  const nodeSize = { x: 150, y: 150 };
+  const foreignObjectProps = { width: "5%", height: "20%", x: -40, y: -30 };
   return (
     <div style={containerStyles}>
       <Tree
