@@ -60,7 +60,7 @@ const renderForeignObjectNode = ({
         </h3>
         {nodeDatum.children && (
           <button style={{ width: "100%" }} onClick={toggleNode}>
-            {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}
+            {nodeDatum.__rd3t.collapsed ? "⬅️ ➡️ Expand" : "➡️ ⬅️ Collapse"}
           </button>
         )}
       </div>
@@ -71,7 +71,7 @@ const renderForeignObjectNode = ({
 export default function Chart() {
   //const [translate, containerRef] = useCenteredTree();
   const nodeSize = { x: 150, y: 150 };
-  const foreignObjectProps = { width: "5%", height: "20%", x: -40, y: -30 };
+  const foreignObjectProps = { width: "5%", height: "20%", x: 10, y: 10 };
   return (
     <div style={containerStyles}>
       <Tree
