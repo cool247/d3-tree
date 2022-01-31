@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.19.2",
+    "d3": "^5.5.0",
+    "material-table": "^1.69.3",
     "react": "^16.8.6",
+    "react-d3-graph": "^2.6.0",
     "react-d3-tree": "^2.0.1",
     "react-dom": "^16.8.6",
+    "react-flow-renderer": "^9.5.1",
     "react-scripts": "3.0.1"
   },
   "scripts": {
